@@ -96,7 +96,3 @@ build/libs/terax-core.jar
 ## 📜 Licença
 
 Este projeto está licenciado sob a **MIT License**. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
-
-👉 Quer que eu adicione também exemplos de uso da **API do plugin** (como registrar uma role, criar um placeholder ou manipular cache), para deixar o README ainda mais didático?
