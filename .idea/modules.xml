@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/terax-core.iml" filepath="$PROJECT_DIR$/terax-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/terax-core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/terax-core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/terax-core.test.iml" filepath="$PROJECT_DIR$/.idea/modules/terax-core.test.iml" />
     </modules>
   </component>
 </project>
