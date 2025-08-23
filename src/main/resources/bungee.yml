@@ -1,0 +1,5 @@
+author: Kiwizin
+name: kCore
+version: 1.0
+
+main: dev.slickcollections.kiwizin.bungee.Bungee

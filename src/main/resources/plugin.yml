@@ -1,0 +1,6 @@
+author: EsinaKiwi
+name: kCore
+version: 1.0
+depend: [ProtocolLib, PlaceholderAPI]
+
+main: dev.slickcollections.kiwizin.Core
