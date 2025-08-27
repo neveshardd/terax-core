@@ -17,7 +17,7 @@ import org.bukkit.inventory.ItemStack;
 public class MenuServers extends UpdatablePlayerMenu {
   
   public MenuServers(Profile profile) {
-    super(profile.getPlayer(), ServerItem.CONFIG.getString("title"), ServerItem.CONFIG.getInt("rows"));
+    super(profile.getPlayer(), ServerItem.CONFIG.getString("title", ""), ServerItem.CONFIG.getInt("rows"));
     
     this.update();
     this.register(Core.getInstance(), 20);

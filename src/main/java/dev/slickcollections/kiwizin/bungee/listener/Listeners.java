@@ -4,12 +4,15 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import dev.slickcollections.kiwizin.bungee.Bungee;
+import dev.slickcollections.kiwizin.bungee.cmd.StaffChatCommand;
 import dev.slickcollections.kiwizin.bungee.party.BungeeParty;
 import dev.slickcollections.kiwizin.bungee.party.BungeePartyManager;
 import dev.slickcollections.kiwizin.database.Database;
+import dev.slickcollections.kiwizin.player.role.Role;
 import dev.slickcollections.kiwizin.reflection.Accessors;
 import dev.slickcollections.kiwizin.reflection.acessors.FieldAccessor;
 import dev.slickcollections.kiwizin.utils.StringUtils;
+import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.ServerConnection;
 import net.md_5.bungee.UserConnection;
 import net.md_5.bungee.api.ProxyServer;
@@ -72,6 +75,8 @@ public class Listeners implements Listener {
       }
     }
   }
+
+
   
   @EventHandler(priority = (byte) 128)
   public void onServerConnected(ServerConnectedEvent evt) {
@@ -104,30 +109,39 @@ public class Listeners implements Listener {
   @EventHandler(priority = (byte) 128)
   public void onChat(ChatEvent evt) {
     if (evt.getSender() instanceof ProxiedPlayer) {
-      if (evt.isCommand()) {
-        ProxiedPlayer player = (UserConnection) evt.getSender();
-        String[] args = evt.getMessage().replace("/", "").split(" ");
-        
-        String command = args[0];
-        if (COMMAND_MAP.get(ProxyServer.getInstance().getPluginManager()).containsKey("lobby") && command.equals("lobby") && this
-            .hasProtectionLobby(player.getName().toLowerCase())) {
-          long last = PROTECTION_LOBBY.getOrDefault(player.getName().toLowerCase(), 0L);
-          if (last > System.currentTimeMillis()) {
-            PROTECTION_LOBBY.remove(player.getName().toLowerCase());
-            return;
-          }
-          
-          evt.setCancelled(true);
-          PROTECTION_LOBBY.put(player.getName().toLowerCase(), System.currentTimeMillis() + 3000);
-          player.sendMessage(TextComponent.fromLegacyText("§aVocê tem certeza? Utilize /lobby novamente para voltar ao lobby."));
-        } else if (COMMAND_MAP.get(ProxyServer.getInstance().getPluginManager()).containsKey("tell") && args.length > 1 && command.equals("tell") && !args[1]
-            .equalsIgnoreCase(player.getName())) {
-          if (!this.canReceiveTell(args[1].toLowerCase())) {
-            evt.setCancelled(true);
-            player.sendMessage(TextComponent.fromLegacyText("§cEste usuário desativou as mensagens privadas."));
-          }
+        ProxiedPlayer player = null;
+        if (evt.isCommand()) {
+            player = (UserConnection) evt.getSender();
+            String[] args = evt.getMessage().replace("/", "").split(" ");
+
+            String command = args[0];
+            if (COMMAND_MAP.get(ProxyServer.getInstance().getPluginManager()).containsKey("lobby") && command.equals("lobby") && this
+                    .hasProtectionLobby(player.getName().toLowerCase())) {
+                long last = PROTECTION_LOBBY.getOrDefault(player.getName().toLowerCase(), 0L);
+                if (last > System.currentTimeMillis()) {
+                    PROTECTION_LOBBY.remove(player.getName().toLowerCase());
+                    return;
+                }
+
+                evt.setCancelled(true);
+                PROTECTION_LOBBY.put(player.getName().toLowerCase(), System.currentTimeMillis() + 3000);
+                player.sendMessage(TextComponent.fromLegacyText("§aVocê tem certeza? Utilize /lobby novamente para voltar ao lobby."));
+            } else if (COMMAND_MAP.get(ProxyServer.getInstance().getPluginManager()).containsKey("tell") && args.length > 1 && command.equals("tell") && !args[1]
+                    .equalsIgnoreCase(player.getName())) {
+                if (!this.canReceiveTell(args[1].toLowerCase())) {
+                    evt.setCancelled(true);
+                    player.sendMessage(TextComponent.fromLegacyText("§cEste usuário desativou as mensagens privadas."));
+                }
+            }
+        } else if (!evt.isCommand()) {
+            if (StaffChatCommand.STAFFS.contains(player)) {
+                evt.setCancelled(true);
+                BungeeCord.getInstance().getPlayers().stream().filter(playerx -> playerx.hasPermission("kutils.cmd.staffchat")).forEach(playerx -> {
+                    playerx.sendMessage(TextComponent.fromLegacyText("§6[SC] " +
+                            Role.getPrefixed(playerx.getName()) + "§f: " + StringUtils.formatColors(evt.getMessage())));
+                });
+            }
         }
-      }
     }
   }
   

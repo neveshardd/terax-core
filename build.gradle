@@ -28,7 +28,7 @@ dependencies {
     implementation 'org.mongodb:mongodb-driver-sync:4.0.5'
 
     implementation files('libraries/waterfall-1.21-598.jar')
-    implementation files('libraries/ProtocolLib-4.5.0.jar')
+    implementation files('libraries/ProtocolLib-4.7.0.jar')
     implementation files('libraries/PlaceholderAPI-2.10.5.jar')
 }
 

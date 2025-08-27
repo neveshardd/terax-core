@@ -28,6 +28,7 @@ public class Bungee extends Plugin {
   private static final Map<String, String> fakeNames = new HashMap<>();
   private static final Map<String, Role> fakeRoles = new HashMap<>();
   private static final Map<String, String> fakeSkins = new HashMap<>();
+    public static Map<ProxiedPlayer, ProxiedPlayer> tell = new HashMap<>();
   private static List<String> randoms;
   private Configuration config;
   private Configuration utils;
@@ -210,19 +211,37 @@ public class Bungee extends Plugin {
     } catch (IOException ex) {
       ex.printStackTrace();
     }
-    
-    for (String key : roles.getSection("roles").getKeys()) {
-      String name = roles.getString("roles." + key + ".name");
-      String prefix = roles.getString("roles." + key + ".prefix");
-      String permission = roles.getString("roles." + key + ".permission");
-      boolean broadcast = roles.getBoolean("roles." + key + ".broadcast", true);
-      boolean alwaysVisible = roles.getBoolean("roles." + key + ".alwaysvisible", false);
-      
-      Role.listRoles().add(new Role(name, prefix, permission, alwaysVisible, broadcast));
-    }
-    
-    if (Role.listRoles().isEmpty()) {
-      Role.listRoles().add(new Role("&7Membro", "&7", "", false, false));
-    }
+
+      for (String key : roles.getSection("roles").getKeys()) {
+          String name = roles.getString("roles." + key + ".name");
+          String prefix = roles.getString("roles." + key + ".prefix");
+          String permission = roles.getString("roles." + key + ".permission");
+          boolean broadcast = roles.getBoolean("roles." + key + ".broadcast", true);
+          boolean alwaysVisible = roles.getBoolean("roles." + key + ".alwaysvisible", false);
+
+          // Passando valores padrão para icon e cmd
+          Role.listRoles().add(new Role(
+                  name,
+                  prefix,
+                  permission,
+                  alwaysVisible,
+                  broadcast,
+                  "", // icon
+                  ""  // cmd
+          ));
+      }
+
+      if (Role.listRoles().isEmpty()) {
+          Role.listRoles().add(new Role(
+                  "&7Membro",
+                  "&7",
+                  "",
+                  false,
+                  false,
+                  "",
+                  ""  // cmd
+          ));
+      }
+
   }
 }

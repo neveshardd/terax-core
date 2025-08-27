@@ -40,16 +40,14 @@ import org.bukkit.entity.Player;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 
 @SuppressWarnings("unchecked")
 public class Core extends KPlugin {
   
   public static final List<String> warnings = new ArrayList<>();
+    public static HashMap<Player, Player> reply = new HashMap<>();
   public static final List<String> minigames = Arrays.asList("Sky Wars", "The Bridge", "Murder", "Bed Wars", "Build Battle");
   
   public static boolean validInit;
@@ -201,7 +199,8 @@ public class Core extends KPlugin {
     NPCLibrary.setupNPCs(this);
     HologramLibrary.setupHolograms(this);
     
-    setupRoles();
+    Role.setupRoles();
+    Language.setupLanguage();
     FakeManager.setupFake();
     Title.setupTitles();
     Booster.setupBoosters();
@@ -253,21 +252,5 @@ public class Core extends KPlugin {
     }
     this.getLogger().info("O plugin foi desativado.");
   }
-  
-  private void setupRoles() {
-    KConfig config = getConfig("roles");
-    for (String key : config.getSection("roles").getKeys(false)) {
-      String name = config.getString("roles." + key + ".name");
-      String prefix = config.getString("roles." + key + ".prefix");
-      String permission = config.getString("roles." + key + ".permission");
-      boolean broadcast = config.getBoolean("roles." + key + ".broadcast", true);
-      boolean alwaysVisible = config.getBoolean("roles." + key + ".alwaysvisible", false);
-      
-      Role.listRoles().add(new Role(name, prefix, permission, alwaysVisible, broadcast));
-    }
-    
-    if (Role.listRoles().isEmpty()) {
-      Role.listRoles().add(new Role("&7Membro", "&7", "", false, false));
-    }
-  }
+
 }

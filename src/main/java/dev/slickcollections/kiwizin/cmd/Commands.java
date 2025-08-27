@@ -28,6 +28,16 @@ public abstract class Commands extends Command {
   public static void setupCommands() {
     new CoreCommand();
     new CoinsCommand();
+    new TitleCommand();
+    new FlyCommand();
+    new GamemodeCommand();
+    new InvseeCommand();
+    new OnlineCommand();
+    new ReplyCommand();
+    new StaffChatCommand();
+    new TellCommand();
+    new WarningCommand();
+    new SetRoleCommand();
     if (CashManager.CASH) {
       new CashCommand();
     }

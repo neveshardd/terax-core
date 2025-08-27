@@ -2,7 +2,10 @@ package dev.slickcollections.kiwizin.listeners;
 
 import dev.slickcollections.kiwizin.Core;
 import dev.slickcollections.kiwizin.Manager;
+import dev.slickcollections.kiwizin.cmd.FlyCommand;
+import dev.slickcollections.kiwizin.cmd.StaffChatCommand;
 import dev.slickcollections.kiwizin.database.exception.ProfileLoadException;
+import dev.slickcollections.kiwizin.nms.NMS;
 import dev.slickcollections.kiwizin.player.Profile;
 import dev.slickcollections.kiwizin.player.enums.PrivateMessages;
 import dev.slickcollections.kiwizin.player.enums.ProtectionLobby;
@@ -114,7 +117,7 @@ public class Listeners implements Listener {
       if (!((CraftServer) Bukkit.getServer()).getHandle().getServer().isRunning() || RESTART_WATCHDOG_STOPPING.get(RESTART_WATCHDOG.get(null))) {
         // server stopped - save SYNC
         profile.saveSync();
-        Core.getInstance().getLogger().info("O jogador " + profile.getName() + " foi salvado!");
+        Core.getInstance().getLogger().info("O jogador " + profile.getName() + " foi salvo!");
       } else {
         // server running - save ASYNC
         profile.save();
@@ -127,6 +130,7 @@ public class Listeners implements Listener {
     FakeManager.fakeSkins.remove(evt.getPlayer().getName());
     DELAY_PLAYERS.remove(evt.getPlayer().getName());
     PROTECTION_LOBBY.remove(evt.getPlayer().getName().toLowerCase());
+      FlyCommand.remove(profile.getPlayer());
   }
   
   @EventHandler(priority = EventPriority.MONITOR)
@@ -155,6 +159,16 @@ public class Listeners implements Listener {
         players.spigot().sendMessage(component);
       }
     });
+
+      if (StaffChatCommand.STAFFS.contains(evt.getPlayer())) {
+          evt.setCancelled(true);
+          Bukkit.getOnlinePlayers().stream().filter(playerx -> playerx.hasPermission("kutils.cmd.staffchat")).forEach(playerx -> {
+              NMS.sendActionBar(playerx, "§eHá uma nova mensagem no chat da staff!");
+              EnumSound.ORB_PICKUP.play(playerx, 1.0F, 1.0F);
+
+              playerx.sendMessage("§6[StaffChat] " + Role.getPrefixed(playerx.getName(), true) + "§f: " + evt.getMessage().replace("&", "§"));
+          });
+      }
   }
   
   @EventHandler(priority = EventPriority.MONITOR)

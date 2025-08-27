@@ -30,7 +30,7 @@ public class ServerItem {
   
   public static void setupServers() {
     for (String key : CONFIG.getSection("items").getKeys(false)) {
-      ServerItem si = new ServerItem(key, CONFIG.getInt("items." + key + ".slot"), CONFIG.getString("items." + key + ".icon"), new LeastConnection<>());
+      ServerItem si = new ServerItem(key, CONFIG.getInt("items." + key + ".slot"), CONFIG.getString("items." + key + ".icon", ""), new LeastConnection<>());
       SERVERS.add(si);
       CONFIG.getStringList("items." + key + ".servernames").forEach(server -> {
         if (server.split(" ; ").length < 2) {

@@ -43,9 +43,9 @@ public class Delivery {
     for (String key : config.getSection("deliveries").getKeys(false)) {
       int slot = config.getInt("deliveries." + key + ".slot");
       int days = config.getInt("deliveries." + key + ".days");
-      String permission = config.getString("deliveries." + key + ".permission");
-      String icon = config.getString("deliveries." + key + ".icon");
-      String message = config.getString("deliveries." + key + ".message");
+      String permission = config.getString("deliveries." + key + ".permission", "");
+      String icon = config.getString("deliveries." + key + ".icon", "");
+      String message = config.getString("deliveries." + key + ".message", "");
       List<DeliveryReward> rewards = new ArrayList<>();
       for (String reward : config.getStringList("deliveries." + key + ".rewards")) {
         rewards.add(new DeliveryReward(reward));

@@ -45,7 +45,7 @@ public class FakeManager {
   
   public static void setupFake() {
     if (CONFIG.get("fake.role") instanceof String) {
-      CONFIG.set("fake.role", Arrays.asList(CONFIG.getString("fake.role")));
+      CONFIG.set("fake.role", Arrays.asList(CONFIG.getString("fake.role", "")));
     }
     FAKE_ROLES = new TextComponent("");
     for (BaseComponent component : TextComponent.fromLegacyText("§5§lALTERAR NICKNAME\n \n§0Escolha o cargo que gostaria de utilizar enquanto está disfarçado:\n ")) {
@@ -100,7 +100,7 @@ public class FakeManager {
   
   public static void applyFake(Player player, String fakeName, String role, String skin) {
     if (!isBungeeSide()) {
-      player.kickPlayer(StringUtils.formatColors(CONFIG.getString("fake.kick-apply")).replace("\\n", "\n"));
+      player.kickPlayer(StringUtils.formatColors(CONFIG.getString("fake.kick-apply", "")).replace("\\n", "\n"));
     }
     fakeNames.put(player.getName(), fakeName);
     fakeRoles.put(player.getName(), Role.getRoleByName(role));
@@ -109,7 +109,7 @@ public class FakeManager {
   
   public static void removeFake(Player player) {
     if (!isBungeeSide()) {
-      player.kickPlayer(StringUtils.formatColors(CONFIG.getString("fake.kick-remove")).replace("\\n", "\n"));
+      player.kickPlayer(StringUtils.formatColors(CONFIG.getString("fake.kick-remove", "")).replace("\\n", "\n"));
     }
     fakeNames.remove(player.getName());
     fakeRoles.remove(player.getName());

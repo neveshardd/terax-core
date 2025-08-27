@@ -1,51 +1,99 @@
+title: 'Setar grupo para {player}'
+
+# Caso você queira botar o número de rows deixe 'false', caso queira que ele
+# adicione uma row cada 7 roles que você botar, deixe 'true'
+rows_auto: true
+
+# Apenas se 'rows_auto' tiver 'false'
+rows: 3
+
 roles:
- master:
-  name: '&6Master'
-  prefix: '&6[Master] '
-  permission: 'role.master'
-  # nao esconder no lobby
-  alwaysvisible: true
- gerente:
-  name: '&4Gerente'
-  prefix: '&4[Gerente] '
-  permission: 'role.gerente'
-  # nao esconder no lobby
-  alwaysvisible: true
- admin:
-  name: '&cAdmin'
-  prefix: '&c[Admin] '
-  permission: 'role.admin'
-  alwaysvisible: true
- moderador:
-  name: '&2Moderador'
-  prefix: '&2[Moderador] '
-  permission: 'role.moderador'
-  alwaysvisible: true
- ajudante:
-  name: '&eAjudante'
-  prefix: '&e[Ajudante] '
-  permission: 'role.ajudante'
-  alwaysvisible: true
- youtuber:
-  name: '&cYouTuber'
-  prefix: '&c[YouTuber] '
-  permission: 'role.youtuber'
-  alwaysvisible: true
- mvpplus:
-  name: '&bMVP&6+'
-  prefix: '&b[MVP&6+&b] '
-  permission: 'role.mvpplus'
- mvp:
-  name: '&6MVP'
-  prefix: '&6[MVP] '
-  permission: 'role.mvp'
- vip:
-  name: '&eVIP'
-  prefix: '&e[VIP] '
-  permission: 'role.vip'
- membro:
-  name: '&7Membro'
-  prefix: '&7'
-  permission: ''
-  # nao enviar avisos ao entrar no lobby
-  broadcast: false
+  master:
+    name: '§6Master'
+    prefix: '§6[Master] '
+    permission: 'role.master'
+    alwaysvisible: true
+    broadcast: true
+    icon: 'WOOL:3:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
+    cmd: 'lp user {player} parent set master'
+
+  gerente:
+    name: '&4Gerente'
+    prefix: '&4[Gerente] '
+    permission: 'role.gerente'
+    alwaysvisible: true
+    broadcast: true
+    icon: 'WOOL:14:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
+    cmd: 'lp user {player} parent set gerente'
+
+  admin:
+    name: '&cAdmin'
+    prefix: '&c[Admin] '
+    permission: 'role.admin'
+    alwaysvisible: true
+    broadcast: true
+    icon: 'WOOL:14:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
+    cmd: 'lp user {player} parent set admin'
+
+  moderador:
+    name: '&2Moderador'
+    prefix: '&2[Moderador] '
+    permission: 'role.moderador'
+    alwaysvisible: true
+    broadcast: true
+    icon: 'WOOL:5:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
+    cmd: 'lp user {player} parent set moderador'
+
+  ajudante:
+    name: '&eAjudante'
+    prefix: '&e[Ajudante] '
+    permission: 'role.ajudante'
+    alwaysvisible: true
+    broadcast: true
+    icon: 'WOOL:4:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
+    cmd: 'lp user {player} parent set ajudante'
+
+  youtuber:
+    name: '&cYouTuber'
+    prefix: '&c[YouTuber] '
+    permission: 'role.youtuber'
+    alwaysvisible: true
+    broadcast: true
+    icon: 'WOOL:1:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
+    cmd: 'lp user {player} parent set youtuber'
+
+  mvpplus:
+    name: '&bMVP&6+'
+    prefix: '&b[MVP&6+&b] '
+    permission: 'role.mvpplus'
+    alwaysvisible: true
+    broadcast: true
+    icon: 'WOOL:3:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
+    cmd: 'lp user {player} parent set mvpplus'
+
+  mvp:
+    name: '&6MVP'
+    prefix: '&6[MVP] '
+    permission: 'role.mvp'
+    alwaysvisible: true
+    broadcast: true
+    icon: 'WOOL:11:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
+    cmd: 'lp user {player} parent set mvp'
+
+  vip:
+    name: '&eVIP'
+    prefix: '&e[VIP] '
+    permission: 'role.vip'
+    alwaysvisible: true
+    broadcast: true
+    icon: 'WOOL:5:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
+    cmd: 'lp user {player} parent set vip'
+
+  membro:
+    name: '&7Membro'
+    prefix: '&7'
+    permission: ''
+    alwaysvisible: true
+    broadcast: false
+    icon: 'WOOL:15:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
+    cmd: 'lp user {player} parent set membro'

@@ -18,6 +18,10 @@ public abstract class Commands extends Command {
     new FakeListCommand();
     new PartyCommand();
     new PartyChatCommand();
+    new ReplyCommand();
+    new StaffChatCommand();
+    new TellCommand();
+    new WarningCommand();
   }
   
   public abstract void perform(CommandSender sender, String[] args);

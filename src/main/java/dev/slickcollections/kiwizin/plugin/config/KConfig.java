@@ -87,8 +87,13 @@ public class KConfig {
   public double getDouble(String path, double def) {
     return this.config.getDouble(path, def);
   }
-  
-  public String getString(String path) {
+
+    public String getString(String path) {
+        return this.config.getString(path);
+    }
+
+
+    public String getString(String path, String s) {
     return this.config.getString(path);
   }
   
