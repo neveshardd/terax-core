@@ -1,5 +1,3 @@
-Claro! Aqui está a tradução fiel para o português, mantendo exatamente a mesma formatação e markdown:
-
 ---
 
 # Terax-Core
