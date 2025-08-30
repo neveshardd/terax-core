@@ -1,152 +1,167 @@
+Claro! Aqui está a tradução fiel para o português, mantendo exatamente a mesma formatação e markdown:
+
+---
+
 # Terax-Core
 
-Terax-Core is a comprehensive core plugin and module designed for Minecraft server networks, specifically targeting Spigot/Paper servers and BungeeCord/Waterfall proxies. It provides a robust, shared foundation of essential features and systems necessary for a modern, interconnected Minecraft experience, centralizing player data, network management, and various in-game mechanics.
+Terax-Core é um plugin e módulo core abrangente projetado para redes de servidores Minecraft, direcionado especificamente para servidores Spigot/Paper e proxies BungeeCord/Waterfall. Ele fornece uma base robusta e compartilhada de recursos e sistemas essenciais necessários para uma experiência Minecraft moderna e interconectada, centralizando dados de jogadores, gerenciamento de rede e várias mecânicas dentro do jogo.
 
-## Features
+## Recursos
 
-Terax-Core offers a wide array of features to enhance and streamline the management of a Minecraft server network:
+Terax-Core oferece uma ampla gama de recursos para melhorar e simplificar o gerenciamento de uma rede de servidores Minecraft:
 
-*   **Centralized Player Profiles**: Manages player statistics, preferences, achievements, roles, and titles across the network.
-*   **Multi-Database Support**: Integrates with MySQL, MongoDB, and HikariCP for efficient data storage, including specialized data tables for various minigames (e.g., BedWars, SkyWars, Murder, TheBridge).
-*   **Dynamic In-Game Menus (GUI)**: Provides interactive graphical user interfaces for profile management, server selection, delivery claims, and more.
-*   **Network-Wide Party System**: Allows players to form and manage parties that persist across different Spigot/Paper servers connected via BungeeCord.
-*   **Advanced Server Load Balancing**: Implements strategies like "Least Connection" and "Most Connection" for efficient distribution of players across game servers.
-*   **Custom Scoreboard and Hotbar Functionalities**: Offers dynamic scoreboards and customizable hotbars for an engaging player experience.
-*   **Comprehensive Achievement System**: Tracks and rewards player achievements for various minigames.
-*   **In-game Currency Management**: Manages two distinct currencies: Cash and Coins.
-*   **NMS (Native Minecraft Server) Integration**: Includes version-specific code for Minecraft 1.8.3, enabling custom entities (NPCs, Holograms), advanced network handling, and pathfinding.
-*   **Fake Player/NPC Management**: Supports custom NPCs with skin and animation capabilities.
-*   **Particle Effects API**: Provides an API for generating and managing in-game particle effects.
-*   **Extensive Command System**: A wide range of player and administrative commands for various functionalities.
-*   **In-game Deliveries and Reward System**: A system for distributing and claiming in-game rewards.
-*   **Role Management and Permissions**: Defines and manages player roles and associated permissions.
-*   **Player Preferences**: Allows players to customize settings like player visibility, private messages, and blood & gore effects.
-*   **Integration with External APIs/Plugins**: Hooks into PlaceholderAPI for dynamic text, ProtocolLib for packet manipulation, Mojang API for player data, and JDA for Discord integration.
-*   **Robust Configuration and Logging Utilities**: Tools for managing plugin configurations and logging events.
-*   **Reflection Utilities**: Advanced utilities for interacting with private/protected Minecraft server code.
+* **Perfis de Jogadores Centralizados**: Gerencia estatísticas, preferências, conquistas, cargos e títulos dos jogadores em toda a rede.
+* **Suporte a Múltiplos Bancos de Dados**: Integração com MySQL, MongoDB e HikariCP para armazenamento eficiente de dados, incluindo tabelas especializadas para vários minigames (ex.: BedWars, SkyWars, Murder, TheBridge).
+* **Menus Dinâmicos no Jogo (GUI)**: Fornece interfaces gráficas interativas para gerenciamento de perfil, seleção de servidor, resgate de entregas e muito mais.
+* **Sistema de Partidas em Rede**: Permite que jogadores formem e gerenciem grupos que persistem entre diferentes servidores Spigot/Paper conectados via BungeeCord.
+* **Balanceamento Avançado de Carga de Servidores**: Implementa estratégias como "Menor Conexão" e "Maior Conexão" para distribuição eficiente de jogadores entre servidores de jogo.
+* **Placar e Funcionalidades Personalizadas de Hotbar**: Oferece placares dinâmicos e hotbars customizáveis para uma experiência envolvente.
+* **Sistema Abrangente de Conquistas**: Rastreia e recompensa conquistas dos jogadores em vários minigames.
+* **Gerenciamento de Moedas do Jogo**: Gerencia duas moedas distintas: Cash e Coins.
+* **Integração NMS (Native Minecraft Server)**: Inclui código específico para a versão 1.8.3 do Minecraft, permitindo entidades personalizadas (NPCs, Hologramas), manipulação avançada de rede e pathfinding.
+* **Gerenciamento de NPCs/Jogadores Falsos**: Suporta NPCs personalizados com skins e animações.
+* **API de Efeitos de Partículas**: Fornece uma API para gerar e gerenciar efeitos de partículas no jogo.
+* **Sistema Extensivo de Comandos**: Uma ampla gama de comandos para jogadores e administradores.
+* **Sistema de Entregas e Recompensas no Jogo**: Um sistema para distribuir e resgatar recompensas no jogo.
+* **Gerenciamento de Cargos e Permissões**: Define e gerencia cargos de jogadores e permissões associadas.
+* **Preferências do Jogador**: Permite que jogadores personalizem configurações como visibilidade de jogadores, mensagens privadas e efeitos de sangue e violência.
+* **Integração com APIs/Plugins Externos**: Integração com PlaceholderAPI para textos dinâmicos, ProtocolLib para manipulação de pacotes, Mojang API para dados de jogadores e JDA para integração com Discord.
+* **Ferramentas Robusta de Configuração e Log**: Ferramentas para gerenciamento de configurações e registro de eventos.
+* **Utilitários de Reflexão**: Utilitários avançados para interação com código privado/protegido do servidor Minecraft.
 
-## Installation
+## Instalação
 
-To install and deploy Terax-Core on your Minecraft server network, follow these steps:
+Para instalar e implementar o Terax-Core em sua rede de servidores Minecraft, siga estes passos:
 
-### Prerequisites
+### Pré-requisitos
 
-*   **Java Development Kit (JDK)**: Version 8 or newer.
-*   **Gradle**: For building the project.
-*   **Minecraft Server**: A running Spigot or Paper server (version 1.8.8 is likely targeted given NMS 1.8.3 integration).
-*   **BungeeCord/Waterfall Proxy**: A running BungeeCord or Waterfall proxy server.
-*   **ProtocolLib**: Required on Spigot/Paper servers for advanced packet manipulation and NPC/Hologram features.
-*   **PlaceholderAPI**: Optional, but recommended for dynamic text placeholders.
+* **Java Development Kit (JDK)**: Versão 8 ou mais recente.
+* **Gradle**: Para compilar o projeto.
+* **Servidor Minecraft**: Um servidor Spigot ou Paper em execução (a versão 1.8.8 é provavelmente o alvo devido à integração com NMS 1.8.3).
+* **Proxy BungeeCord/Waterfall**: Um servidor proxy BungeeCord ou Waterfall em execução.
+* **ProtocolLib**: Necessário em servidores Spigot/Paper para manipulação avançada de pacotes e recursos de NPC/Holograma.
+* **PlaceholderAPI**: Opcional, mas recomendado para placeholders dinâmicos.
 
-### Building from Source
+### Compilando a Partir do Código-Fonte
 
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/neveshardd/terax-core.git
-    cd terax-core
-    ```
+1. **Clone o repositório**:
 
-2.  **Build the project using Gradle**:
-    This command will compile the project and create a shaded JAR file containing all dependencies.
-    ```bash
-    ./gradlew shadowJar
-    ```
-    On Windows, use `gradlew.bat shadowJar`.
+   ```bash
+   git clone https://github.com/neveshardd/terax-core.git
+   cd terax-core
+   ```
 
-3.  **Locate the compiled JAR**:
-    The compiled plugin JAR file, typically named `TeraxCore.jar`, will be found in the `build/libs/` directory.
+2. **Compile o projeto usando Gradle**:
+   Este comando compilará o projeto e criará um arquivo JAR sombreado contendo todas as dependências.
 
-### Deployment
+   ```bash
+   ./gradlew shadowJar
+   ```
 
-1.  **Spigot/Paper Servers**:
-    *   Place the `TeraxCore.jar` file into the `plugins/` folder of your Spigot/Paper servers.
-    *   Ensure ProtocolLib and PlaceholderAPI (if used) are also in the `plugins/` folder.
+   No Windows, use `gradlew.bat shadowJar`.
 
-2.  **BungeeCord/Waterfall Proxy**:
-    *   Place the `TeraxCore.jar` file into the `modules/` folder of your BungeeCord/Waterfall proxy.
+3. **Localize o JAR compilado**:
+   O arquivo JAR compilado do plugin, normalmente chamado `TeraxCore.jar`, será encontrado no diretório `build/libs/`.
 
-3.  **Configuration**:
-    *   Start your servers. Terax-Core will generate default configuration files in the `plugins/TeraxCore/` directory (for Spigot/Paper) and `modules/TeraxCore/` directory (for BungeeCord).
-    *   Carefully review and adjust `config.yml`, `bungee.yml`, `roles.yml`, `servers.yml`, `deliveries.yml`, `blacklist.txt`, and `utils.yml` to match your network's setup and preferences.
+### Implantação
 
-4.  **Restart Servers**:
-    Restart all your Spigot/Paper and BungeeCord/Waterfall servers to apply the configuration changes and fully enable Terax-Core.
+1. **Servidores Spigot/Paper**:
 
-## Usage
+   * Coloque o arquivo `TeraxCore.jar` na pasta `plugins/` de seus servidores Spigot/Paper.
+   * Certifique-se de que ProtocolLib e PlaceholderAPI (se usados) também estejam na pasta `plugins/`.
 
-Once installed and configured, Terax-Core provides a seamless experience for players and administrators alike.
+2. **Proxy BungeeCord/Waterfall**:
 
-### In-Game Commands
+   * Coloque o arquivo `TeraxCore.jar` na pasta `modules/` do seu proxy BungeeCord/Waterfall.
 
-Terax-Core registers numerous commands for both general players and staff:
+3. **Configuração**:
 
-*   **Player Commands**:
-    *   `/party`: Manage player parties (create, invite, leave, chat).
-    *   `/tell <player> <message>` or `/w <player> <message>`: Send private messages.
-    *   `/reply <message>` or `/r <message>`: Reply to the last private message.
-    *   `/online`: View online player count.
+   * Inicie seus servidores. O Terax-Core irá gerar arquivos de configuração padrão nos diretórios `plugins/TeraxCore/` (para Spigot/Paper) e `modules/TeraxCore/` (para BungeeCord).
+   * Revise e ajuste cuidadosamente `config.yml`, `bungee.yml`, `roles.yml`, `servers.yml`, `deliveries.yml`, `blacklist.txt` e `utils.yml` para corresponder à configuração e preferências da sua rede.
 
-*   **Administrative/Staff Commands**:
-    *   `/staffchat <message>`: Communicate with other staff members.
-    *   `/fake [name]`: Manage fake players/NPCs.
-    *   `/setrole <player> <role>`: Assign roles to players.
-    *   `/cash <player> [add|remove|set] <amount>`: Manage player cash.
-    *   `/coins <player> [add|remove|set] <amount>`: Manage player coins.
-    *   `/title <player> [set|remove] <title>`: Manage player titles.
-    *   `/fly`: Toggle flight mode.
-    *   `/gamemode [mode]`: Change game mode.
-    *   `/invsee <player>`: View a player's inventory.
-    *   `/warning <player> <reason>`: Issue warnings to players.
-    *   `/core`: Main administrative command for plugin management.
+4. **Reinicie os Servidores**:
+   Reinicie todos os seus servidores Spigot/Paper e BungeeCord/Waterfall para aplicar as mudanças de configuração e habilitar totalmente o Terax-Core.
 
-### Graphical User Interfaces (GUIs)
+## Uso
 
-Players can access various GUI menus for interacting with Terax-Core features:
+Uma vez instalado e configurado, o Terax-Core fornece uma experiência fluida tanto para jogadores quanto para administradores.
 
-*   `/profile`: Access your player profile, statistics, preferences, achievements, titles, and boosters.
-*   `/servers`: View and connect to different game servers on the network.
-*   `/deliveries`: Claim available in-game rewards.
+### Comandos no Jogo
 
-## Tech Stack
+O Terax-Core registra diversos comandos tanto para jogadores comuns quanto para a staff:
 
-Terax-Core is built using a robust set of technologies:
+* **Comandos de Jogadores**:
 
-*   **Language**: Java
-*   **Build Tool**: Gradle
-*   **Minecraft APIs**:
-    *   Bukkit/Spigot API
-    *   BungeeCord API
-    *   Native Minecraft Server (NMS) for Minecraft 1.8.3
-*   **Key Libraries/Frameworks**:
-    *   ProtocolLib (for advanced packet manipulation and custom entities)
-    *   PlaceholderAPI (for dynamic text)
-    *   HikariCP (JDBC connection pooling for MySQL)
-    *   MongoDB Java Driver
-    *   JSON Simple (for JSON parsing)
-    *   JDA (Java Discord API)
-    *   Google Guava
-*   **Integrated/Vendored Libraries**:
-    *   Custom Menu system
-    *   Hologram library
-    *   NPCLib (for advanced NPC management)
-    *   Mojang API interaction (for player data)
+  * `/party`: Gerenciar grupos de jogadores (criar, convidar, sair, conversar).
+  * `/tell <jogador> <mensagem>` ou `/w <jogador> <mensagem>`: Enviar mensagens privadas.
+  * `/reply <mensagem>` ou `/r <mensagem>`: Responder à última mensagem privada.
+  * `/online`: Ver a contagem de jogadores online.
 
-## Project Structure
+* **Comandos Administrativos/Staff**:
 
-The project follows a standard Java/Gradle structure with specific directories for its various components:
+  * `/staffchat <mensagem>`: Comunicar-se com outros membros da staff.
+  * `/fake [nome]`: Gerenciar jogadores falsos/NPCs.
+  * `/setrole <jogador> <cargo>`: Atribuir cargos a jogadores.
+  * `/cash <jogador> [add|remove|set] <quantia>`: Gerenciar cash do jogador.
+  * `/coins <jogador> [add|remove|set] <quantia>`: Gerenciar coins do jogador.
+  * `/title <jogador> [set|remove] <título>`: Gerenciar títulos do jogador.
+  * `/fly`: Alternar modo de voo.
+  * `/gamemode [modo]`: Alterar modo de jogo.
+  * `/invsee <jogador>`: Ver inventário de um jogador.
+  * `/warning <jogador> <razão>`: Emitir advertências para jogadores.
+  * `/core`: Comando principal administrativo para gerenciamento do plugin.
+
+### Interfaces Gráficas (GUIs)
+
+Jogadores podem acessar vários menus GUI para interagir com os recursos do Terax-Core:
+
+* `/profile`: Acessar seu perfil de jogador, estatísticas, preferências, conquistas, títulos e boosters.
+* `/servers`: Ver e conectar-se a diferentes servidores da rede.
+* `/deliveries`: Resgatar recompensas disponíveis no jogo.
+
+## Stack Tecnológica
+
+Terax-Core é construído usando um conjunto robusto de tecnologias:
+
+* **Linguagem**: Java
+* **Ferramenta de Build**: Gradle
+* **APIs do Minecraft**:
+
+  * Bukkit/Spigot API
+  * BungeeCord API
+  * Native Minecraft Server (NMS) para Minecraft 1.8.3
+* **Bibliotecas/Frameworks Principais**:
+
+  * ProtocolLib (para manipulação avançada de pacotes e entidades personalizadas)
+  * PlaceholderAPI (para textos dinâmicos)
+  * HikariCP (pool de conexões JDBC para MySQL)
+  * MongoDB Java Driver
+  * JSON Simple (para parsing de JSON)
+  * JDA (Java Discord API)
+  * Google Guava
+* **Bibliotecas Integradas/Empacotadas**:
+
+  * Sistema de Menu personalizado
+  * Biblioteca de Hologramas
+  * NPCLib (para gerenciamento avançado de NPCs)
+  * Interação com API Mojang (para dados de jogadores)
+
+## Estrutura do Projeto
+
+O projeto segue uma estrutura padrão de Java/Gradle com diretórios específicos para seus vários componentes:
 
 ```
 terax-core/
-├── .gradle/                  # Gradle internal files
-├── build/                    # Compiled output and build artifacts
-├── gradle/                   # Gradle wrapper files
-├── libraries/                # External JAR dependencies (e.g., ProtocolLib, PlaceholderAPI, JDA)
+├── .gradle/                  # Arquivos internos do Gradle
+├── build/                    # Saída compilada e artefatos de build
+├── gradle/                   # Arquivos do wrapper Gradle
+├── libraries/                # Dependências JAR externas (ex.: ProtocolLib, PlaceholderAPI, JDA)
 ├── src/
 │   ├── main/
-│   │   ├── java/             # Main Java source code
+│   │   ├── java/             # Código-fonte principal em Java
 │   │   │   └── dev/
 │   │   │       └── slickcollections/
-│   │   │           └── kiwizin/ # Core logic, player management, database, NMS, etc.
+│   │   │           └── kiwizin/ # Lógica central, gerenciamento de jogadores, banco de dados, NMS, etc.
 │   │   │               ├── achievements/
 │   │   │               ├── bungee/
 │   │   │               ├── cmd/
@@ -164,31 +179,35 @@ terax-core/
 │   │   │               ├── servers/
 │   │   │               ├── titles/
 │   │   │               └── utils/
-│   │   └── resources/        # Plugin configuration files and descriptors
-│   │       ├── plugin.yml    # Spigot/Bukkit plugin descriptor
-│   │       ├── bungee.yml    # BungeeCord module descriptor
-│   │       ├── config.yml    # Main plugin configuration
-│   │       ├── roles.yml     # Role definitions
-│   │       ├── servers.yml   # Server list for load balancing/selection
-│   │       ├── deliveries.yml # Delivery reward configurations
-│   │       ├── blacklist.txt # Placeholder for blacklisted names
-│   │       └── utils.yml     # Utility configurations
-├── build.gradle              # Gradle build configuration file
-├── gradlew                   # Gradle wrapper script (Linux/macOS)
-├── gradlew.bat               # Gradle wrapper script (Windows)
-├── LICENSE                   # Project license file
-└── README.md                 # This README file
+│   │   └── resources/        # Arquivos de configuração do plugin e descritores
+│   │       ├── plugin.yml    # Descritor do plugin Spigot/Bukkit
+│   │       ├── bungee.yml    # Descritor do módulo BungeeCord
+│   │       ├── config.yml    # Configuração principal do plugin
+│   │       ├── roles.yml     # Definições de cargos
+│   │       ├── servers.yml   # Lista de servidores para balanceamento/seleção
+│   │       ├── deliveries.yml # Configurações de recompensas/entregas
+│   │       ├── blacklist.txt # Placeholder para nomes bloqueados
+│   │       └── utils.yml     # Configurações utilitárias
+├── build.gradle              # Arquivo de configuração do Gradle
+├── gradlew                   # Script do wrapper Gradle (Linux/macOS)
+├── gradlew.bat               # Script do wrapper Gradle (Windows)
+├── LICENSE                   # Arquivo de licença do projeto
+└── README.md                 # Este arquivo README
 ```
 
-## Contributing
+## Contribuindo
 
-Contributions to Terax-Core are welcome! If you find a bug, have a feature request, or want to improve the codebase, please feel free to:
+Contribuições para o Terax-Core são bem-vindas! Se você encontrar um bug, tiver uma sugestão de recurso ou quiser melhorar o código, sinta-se à vontade para:
 
-1.  Fork the repository.
-2.  Create a new branch for your feature or bug fix.
-3.  Make your changes, ensuring code quality and adherence to existing coding styles.
-4.  Submit a pull request with a clear description of your changes.
+1. Fazer um fork do repositório.
+2. Criar uma nova branch para sua funcionalidade ou correção.
+3. Fazer suas alterações, garantindo qualidade de código e aderência ao estilo existente.
+4. Enviar um pull request com uma descrição clara das mudanças.
 
-## License
+## Licença
 
-This project is licensed under the terms specified in the `LICENSE` file in the root of the repository.
+Este projeto é licenciado sob os termos especificados no arquivo `LICENSE` na raiz do repositório.
+
+---
+
+Quer que eu também **traduza o arquivo LICENSE (Apache 2.0)** para português (uso informativo) e deixe junto ao README?
