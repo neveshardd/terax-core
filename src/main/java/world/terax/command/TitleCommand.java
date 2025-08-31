@@ -34,7 +34,7 @@ public class TitleCommand extends Commands {
             player.sendMessage(
                     "\n§eUso correto:\n" +
                             "§6/title list §f- §7Lista todos os titles disponíveis.\n" +
-                            "§6/title <titleId> <player> §f- §7Adiciona um title a um jogador.\n"
+                            "§6/title <titleId> <player> §f- §7Adiciona um title a um jogador.\n§8"
             );
             return;
         }
@@ -46,7 +46,7 @@ public class TitleCommand extends Commands {
                     .collect(Collectors.joining("\n"));
 
             player.sendMessage("\n§eTitles disponíveis:\n" + titles);
-            player.sendMessage("§eUse /title <titleId> <player> para adicionar um title a um jogador.\n");
+            player.sendMessage("§eUse /title <titleId> <player> para adicionar um title a um jogador.\n§6");
             return;
         }
 

@@ -62,28 +62,28 @@ roles:
     icon: 'WOOL:1:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
     cmd: 'lp user {player} parent set youtuber'
 
-  mvpplus:
-    name: '&bMVP&6+'
-    prefix: '&b[MVP&6+&b] '
-    permission: 'role.mvpplus'
+  desafiante:
+    name: '&bDesafiante'
+    prefix: '&b&lDSF &b'
+    permission: 'role.desafiante'
     alwaysvisible: true
     broadcast: true
     icon: 'WOOL:3:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
     cmd: 'lp user {player} parent set mvpplus'
 
-  mvp:
-    name: '&6MVP'
-    prefix: '&6[MVP] '
-    permission: 'role.mvp'
+  lenda:
+    name: '&6Lenda'
+    prefix: '&6&lLND &6'
+    permission: 'role.lenda'
     alwaysvisible: true
     broadcast: true
     icon: 'WOOL:11:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
     cmd: 'lp user {player} parent set mvp'
 
-  vip:
-    name: '&eVIP'
-    prefix: '&e[VIP] '
-    permission: 'role.vip'
+  campeao:
+    name: '&eCampeão'
+    prefix: '&e&lCMP &e'
+    permission: 'role.campeao'
     alwaysvisible: true
     broadcast: true
     icon: 'WOOL:5:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
