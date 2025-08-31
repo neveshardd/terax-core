@@ -1,0 +1,43 @@
+
+_______
+LEGENDA
+— > ; final da permissão.
+— > , pode ser a primeira permissão ou a segunda.
+
+__________
+PERMISSÕES
+
+Core Admin: core.admin;
+Cash Admin: command.cash;
+
+Fake: command.fake; command.fakelist;
+Fly: command.fly;
+Gamemode: command.gm, command.gamemode;
+Invsee: command.inv;
+SetRoles: command.setgroup;
+StaffChat: command.staffchat;
+Titles: command.title;
+Avisos: command.aviso;
+
+Cores no Tell: tell.color;
+
+Queue: permission.queue
+
+________
+COMANDOS
+
+Cash: /cash
+Coins: /coins
+Core: /core, /c
+Fake: /fake, /fakelist, /faker, /fakel
+Fly: /fly, /voar
+Gamemode: /gamemode, /gm
+Invsee: /inv, /invsee
+Online: /online, /on
+Party: /p, /party
+Reply: /r, /reply
+SetRole: /setrole, /setgroup, /group, /role
+StaffChat: /sc, /staffchat
+Tell: /tell, /whisper
+Title: /title, /titles, /tt, /tts
+Warning: /aviso, /bc, /alert

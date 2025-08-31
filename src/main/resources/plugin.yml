@@ -1,6 +1,6 @@
-author: EsinaKiwi
-name: kCore
+author: neveshardd
+name: Core
 version: 1.0
 depend: [ProtocolLib, PlaceholderAPI]
 
-main: dev.slickcollections.kiwizin.Core
+main: world.terax.Core

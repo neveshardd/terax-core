@@ -4,7 +4,7 @@ cash: true
 bungeecord: false
 # Ative isso caso deseja utilizar a Fila
 queue: true
-# /fake do kCore
+# /fake do Core
 fake:
   # Roles que podem ser utilizadas com o /fake
   # As role vão de acordo com as do servidor spigot em que o jogador está conectado.
@@ -21,9 +21,9 @@ fake:
     - 'overdead'
     - 'traveler'
   # Mensagem de kick ao utilizar o /fake
-  kick-apply: '&c&lREDE SLICK\n \n&aSeu nick foi modificado\n&aEntre novamente no servidor para que faça efeito.'
+  kick-apply: '&c&lTERAX\n \n&aSeu nick foi modificado\n&aEntre novamente no servidor para que faça efeito.'
   # Mensagem de kick ao utilizar o /faker
-  kick-remove: '&c&lREDE SLICK\n \n&aSeu nick foi resetado\n&aEntre novamente no servidor para que faça efeito.'
+  kick-remove: '&c&lTERAX\n \n&aSeu nick foi resetado\n&aEntre novamente no servidor para que faça efeito.'
 # /party do mCore
 party:
   # Tamanho da party por permissão

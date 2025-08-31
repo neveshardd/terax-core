@@ -60,13 +60,13 @@ processResources {
 }
 
 jar {
-    archiveBaseName.set('TeraxCore')
+    archiveBaseName.set('Core')
     archiveVersion.set('')
     archiveClassifier.set('')
 }
 
 shadowJar {
-    archiveBaseName.set('TeraxCore')
+    archiveBaseName.set('Core')
     archiveClassifier.set('')
     archiveVersion.set('')
 
