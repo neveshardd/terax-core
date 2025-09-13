@@ -8,92 +8,141 @@ rows_auto: true
 rows: 3
 
 roles:
-  master:
-    name: '§6Master'
-    prefix: '§6[Master] '
-    permission: 'role.master'
+  diretor:
+    name: '&cDiretor'
+    prefix: '&c&lDIRETOR &c'
+    suffix: null
+    permission: 'role.diretor'
     alwaysvisible: true
     broadcast: true
     icon: 'WOOL:3:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
-    cmd: 'lp user {player} parent set master'
-
-  gerente:
-    name: '&4Gerente'
-    prefix: '&4[Gerente] '
-    permission: 'role.gerente'
-    alwaysvisible: true
-    broadcast: true
-    icon: 'WOOL:14:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
-    cmd: 'lp user {player} parent set gerente'
+    cmd: 'lp user {player} group set diretor'
 
   admin:
     name: '&cAdmin'
-    prefix: '&c[Admin] '
+    prefix: '&c&lADMIN &c'
+    suffix: null
     permission: 'role.admin'
     alwaysvisible: true
     broadcast: true
     icon: 'WOOL:14:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
-    cmd: 'lp user {player} parent set admin'
+    cmd: 'lp user {player} group set admin'
 
-  moderador:
-    name: '&2Moderador'
-    prefix: '&2[Moderador] '
-    permission: 'role.moderador'
+  dev:
+    name: '&aDev'
+    prefix: '&a&lDEV &a'
+    suffix: null
+    permission: 'role.dev'
     alwaysvisible: true
     broadcast: true
     icon: 'WOOL:5:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
-    cmd: 'lp user {player} parent set moderador'
+    cmd: 'lp user {player} group set dev'
 
-  ajudante:
-    name: '&eAjudante'
-    prefix: '&e[Ajudante] '
-    permission: 'role.ajudante'
+  builder:
+    name: '&aBuilder'
+    prefix: '&a&lBUILDER &a'
+    suffix: null
+    permission: 'role.builder'
+    alwaysvisible: true
+    broadcast: true
+    icon: 'WOOL:5:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
+    cmd: 'lp user {player} group set builder'
+
+  mod:
+    name: '&2Mod'
+    prefix: '&2&lMOD &2'
+    suffix: null
+    permission: 'role.mod'
+    alwaysvisible: true
+    broadcast: true
+    icon: 'WOOL:5:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
+    cmd: 'lp user {player} group set mod'
+
+  suporte:
+    name: '&eSuporte'
+    prefix: '&e&lSUPORTE &e'
+    permission: 'role.suporte'
+    suffix: null
     alwaysvisible: true
     broadcast: true
     icon: 'WOOL:4:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
-    cmd: 'lp user {player} parent set ajudante'
+    cmd: 'lp user {player} group set suporte'
+
+  streamer:
+    name: '&dStreamer'
+    prefix: '&dStreamer &d'
+    suffix: null
+    permission: 'role.streamer'
+    alwaysvisible: true
+    broadcast: true
+    icon: 'WOOL:1:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
+    cmd: 'lp user {player} group set streamer'
 
   youtuber:
     name: '&cYouTuber'
-    prefix: '&c[YouTuber] '
+    prefix: '&cYouTuber &c'
+    suffix: null
     permission: 'role.youtuber'
     alwaysvisible: true
     broadcast: true
     icon: 'WOOL:1:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
-    cmd: 'lp user {player} parent set youtuber'
+    cmd: 'lp user {player} group set youtuber'
 
-  desafiante:
-    name: '&bDesafiante'
-    prefix: '&b&lDSF &b'
-    permission: 'role.desafiante'
+  tiktoker:
+    name: '&5TikToker'
+    prefix: '&5TikToker &5'
+    suffix: null
+    permission: 'role.tiktoker'
+    alwaysvisible: true
+    broadcast: true
+    icon: 'WOOL:1:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
+    cmd: 'lp user {player} group set tiktoker'
+
+  chall:
+    name: '&bChallenger'
+    prefix: '&b&lCHALL &b'
+    suffix: null
+    permission: 'role.chall'
     alwaysvisible: true
     broadcast: true
     icon: 'WOOL:3:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
-    cmd: 'lp user {player} parent set mvpplus'
+    cmd: 'lp user {player} group set chall'
 
-  lenda:
-    name: '&6Lenda'
-    prefix: '&6&lLND &6'
-    permission: 'role.lenda'
+  legend:
+    name: '&6Legend'
+    prefix: '&6&lLEGEND &6'
+    suffix: null
+    permission: 'role.legend'
     alwaysvisible: true
     broadcast: true
     icon: 'WOOL:11:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
-    cmd: 'lp user {player} parent set mvp'
+    cmd: 'lp user {player} group set legend'
 
-  campeao:
-    name: '&eCampeão'
-    prefix: '&e&lCMP &e'
-    permission: 'role.campeao'
+  champion:
+    name: '&eChampion'
+    prefix: '&e&lCHAMPION &e'
+    suffix: null
+    permission: 'role.champion'
     alwaysvisible: true
     broadcast: true
     icon: 'WOOL:5:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
-    cmd: 'lp user {player} parent set vip'
+    cmd: 'lp user {player} group set champion'
 
-  membro:
+  colab:
+    name: '&9Colab'
+    prefix: '&9Colab &9'
+    suffix: null
+    permission: 'role.colab'
+    alwaysvisible: true
+    broadcast: true
+    icon: 'WOOL:5:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
+    cmd: 'lp user {player} group set colab'
+
+  default:
     name: '&7Membro'
     prefix: '&7'
     permission: ''
     alwaysvisible: true
     broadcast: false
     icon: 'WOOL:15:1:nome>{role}:desc>&7Setar o cargo de {player}\n&7para {role}'
-    cmd: 'lp user {player} parent set membro'
+    cmd: 'lp user {player} group set default'

@@ -5,11 +5,15 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.WrappedDataWatcher;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
+import world.terax.Core;
 import world.terax.player.Profile;
 import world.terax.reflection.Accessors;
 import world.terax.reflection.MinecraftReflection;
 import world.terax.reflection.acessors.FieldAccessor;
-import org.bukkit.entity.Player;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -24,12 +28,13 @@ public class TitleController {
     private WrappedDataWatcher watcher;
     private boolean disabled = true;
     private final int entityId;
+    private boolean spawned = false;
+    private BukkitTask teleportTask;
 
     public TitleController(Player owner, String title) {
         this.owner = owner;
         this.watcher = new WrappedDataWatcher();
 
-        // 1.8.8 não usa Registry, usa IDs diretamente
         watcher.setObject(0, (byte) 0x20); // invisível
         watcher.setObject(2, title);       // nome customizado
         watcher.setObject(3, (byte) 1);    // nome visível
@@ -43,11 +48,9 @@ public class TitleController {
     public void setName(String name) {
         boolean wasDisabled = "disabled".equals(this.watcher.getString(2));
 
-        // Atualiza diretamente pelo índice
         this.watcher.setObject(2, name);
 
         if (wasDisabled) {
-            // Antes estava "disabled", agora ativo → mostrar novamente
             Profile.listProfiles().forEach(profile -> {
                 Player player = profile.getPlayer();
                 if (player != null && player.canSee(this.owner)) {
@@ -58,7 +61,6 @@ public class TitleController {
         }
 
         if ("disabled".equals(name)) {
-            // Se o nome for "disabled" → esconder
             Profile.listProfiles().forEach(profile -> {
                 Player player = profile.getPlayer();
                 if (player != null && player.canSee(this.owner)) {
@@ -68,13 +70,12 @@ public class TitleController {
             return;
         }
 
-        // Atualiza metadata para todos os players visíveis
         Profile.listProfiles().forEach(profile -> {
             Player player = profile.getPlayer();
             if (player != null && player.canSee(this.owner)) {
                 try {
                     PacketContainer metadataPacket = protocol.createPacket(PacketType.Play.Server.ENTITY_METADATA);
-                    metadataPacket.getIntegers().write(0, this.entityId); // entity id
+                    metadataPacket.getIntegers().write(0, this.entityId);
                     metadataPacket.getWatchableCollectionModifier().write(0, watcher.getWatchableObjects());
                     protocol.sendServerPacket(player, metadataPacket);
                 } catch (InvocationTargetException e) {
@@ -83,8 +84,6 @@ public class TitleController {
             }
         });
     }
-
-
 
     public void destroy() {
         disable();
@@ -99,6 +98,15 @@ public class TitleController {
             Player player = profile.getPlayer();
             if (player != null && player.canSee(owner)) showToPlayer(player);
         });
+
+        // Inicia task automática para teleports
+        if (teleportTask == null) {
+            teleportTask = Bukkit.getScheduler().runTaskTimer(
+                    Bukkit.getPluginManager().getPlugin(Core.getInstance().getName()),
+                    this::teleportAllViewers,
+                    1L, 1L // a cada 2 ticks (~0.1s)
+            );
+        }
     }
 
     public void disable() {
@@ -108,42 +116,70 @@ public class TitleController {
             if (player != null && player.canSee(owner)) hideToPlayer(player);
         });
         disabled = true;
+
+        // Cancela task de teleports
+        if (teleportTask != null) {
+            teleportTask.cancel();
+            teleportTask = null;
+        }
     }
 
+     // altura ajustável
     public void showToPlayer(Player player) {
         if (player.equals(this.owner) || disabled) return;
 
         try {
-            double baseX = owner.getLocation().getX();
-            double baseY = owner.getLocation().getY() * 32.0;
-            double baseZ = owner.getLocation().getZ();
+            Location loc = owner.getLocation().clone().add(0, 1.1, 0);
+            int x = (int) Math.floor(loc.getX() * 32.0);
+            int y = (int) Math.floor(loc.getY() * 32.0);
+            int z = (int) Math.floor(loc.getZ() * 32.0);
 
-            for (int i = 0; i < 5; i++) { // envia várias vezes para reforçar a atualização
-                // Spawn invisível ArmorStand
-                PacketContainer spawn = protocol.createPacket(PacketType.Play.Server.SPAWN_ENTITY_LIVING);
-                spawn.getIntegers().write(0, this.entityId); // entity id
-                spawn.getIntegers().write(1, 30);            // 30 = ArmorStand
-                spawn.getIntegers().write(2, (int) baseX);
-                spawn.getIntegers().write(3, (int) baseY); // posição acima do displayname
-                spawn.getIntegers().write(4, (int) baseZ);
-                spawn.getDataWatcherModifier().write(0, watcher);
+            PacketContainer spawn = protocol.createPacket(PacketType.Play.Server.SPAWN_ENTITY_LIVING);
+            spawn.getIntegers().write(0, this.entityId); // entity id
+            spawn.getIntegers().write(1, 30);            // 30 = ArmorStand
+            spawn.getIntegers().write(2, x);
+            spawn.getIntegers().write(3, y);
+            spawn.getIntegers().write(4, z);
+            spawn.getDataWatcherModifier().write(0, watcher);
 
-                // Montar o ArmorStand no player (passenger)
-                PacketContainer attach = protocol.createPacket(PacketType.Play.Server.ATTACH_ENTITY);
-                attach.getIntegers().write(0, 0);                  // nenhum leash
-                attach.getIntegers().write(1, this.entityId);     // ArmorStand
-                attach.getIntegers().write(2, owner.getEntityId()); // veículo = player
-
-                protocol.sendServerPacket(player, spawn);
-                protocol.sendServerPacket(player, attach);
-            }
+            protocol.sendServerPacket(player, spawn);
+            spawned = true;
 
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
     }
 
+    public void teleportAllViewers() {
+        if (!spawned || owner == null || disabled) return;
+        Profile.listProfiles().forEach(profile -> {
+            Player viewer = profile.getPlayer();
+            if (viewer != null && viewer.canSee(owner)) {
+                teleportToPlayer(viewer);
+            }
+        });
+    }
 
+    public void teleportToPlayer(Player viewer) {
+        try {
+            Location loc = owner.getLocation().clone().add(0, 1.1, 0);
+            int x = (int) Math.floor(loc.getX() * 32.0);
+            int y = (int) Math.floor(loc.getY() * 32.0);
+            int z = (int) Math.floor(loc.getZ() * 32.0);
+
+            PacketContainer teleport = protocol.createPacket(PacketType.Play.Server.ENTITY_TELEPORT);
+            teleport.getIntegers().write(0, this.entityId);
+            teleport.getIntegers().write(1, x);
+            teleport.getIntegers().write(2, y);
+            teleport.getIntegers().write(3, z);
+            teleport.getBytes().write(0, (byte) 0);
+            teleport.getBytes().write(1, (byte) 0);
+
+            protocol.sendServerPacket(viewer, teleport);
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
 
     void hideToPlayer(Player player) {
         if (player.equals(owner)) return;
@@ -153,6 +189,7 @@ public class TitleController {
             PacketContainer destroy = protocol.createPacket(PacketType.Play.Server.ENTITY_DESTROY);
             destroy.getIntegerArrays().write(0, new int[]{entityId});
             protocol.sendServerPacket(player, destroy);
+            spawned = false;
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }

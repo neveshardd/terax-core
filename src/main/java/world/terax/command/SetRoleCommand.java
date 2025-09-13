@@ -18,35 +18,66 @@ public class SetRoleCommand extends Commands{
 
     @Override
     public void perform(CommandSender sender, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("§cApenas jogadores podem utilizar este comando.");
-            return;
-        }
-        Player player = (Player) sender;
-        if (!player.hasPermission("command.setgroup")) {
-            player.sendMessage("§cVocê não tem permissão para executar este comando.");
-            return;
-        }
-        if (args.length == 0) {
-            player.sendMessage("Utilize /setrole [player] ou /setrole [player] [grupo]");
-            return;
-        }
-        if (args.length == 1) {
-            new MenuSetRole(Profile.getProfile(player.getName()), args[0]);
-        } else {
-            if (Role.getRoleByName(args[1]) == null) {
-                player.sendMessage("§cUtilize apenas grupos válidos.");
+        Player player = null;
+        boolean isPlayer = sender instanceof Player;
+        if (isPlayer) {
+            player = (Player) sender;
+            if (!player.hasPermission("command.setgroup")) {
+                player.sendMessage("§cVocê não tem permissão para executar este comando.");
                 return;
             }
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + args[0] + " parent set " + args[1]);
-            player.sendMessage(Language.roles$set.replace("{player}", args[0]).replace("{role}", Role.getRoleByName(args[1]).getName()));
-            Bukkit.getOnlinePlayers().forEach(playerr -> NMS.sendTitle(playerr, Language.roles$titles$header.replace("{player}", StringUtils.getFirstColor(Role.getRoleByName(args[1]).getName()) + " " + args[0]), Language.roles$titles$footer.replace("{role}", Role.getRoleByName(args[1]).getName())));
-            if (Bukkit.getPlayerExact(args[0]) != null) {
-                if (Bukkit.getPlayerExact(args[0]).isOnline()) {
-                    Bukkit.getPlayerExact(args[0]).sendMessage(Language.roles$notification.replace("{role}", Role.getRoleByName(args[1]).getName()));
-                }
+        }
+
+        if (args.length == 0) {
+            if (isPlayer) {
+                player.sendMessage("Utilize /setrole [player] ou /setrole [player] [grupo]");
+            } else {
+                sender.sendMessage("Console precisa fornecer argumentos: /setrole [player] [grupo]");
             }
+            return;
+        }
+
+        if (args.length == 1) {
+            if (isPlayer) {
+                new MenuSetRole(Profile.getProfile(player.getName()), args[0]);
+            } else {
+                sender.sendMessage("Console precisa fornecer o grupo: /setrole [player] [grupo]");
+            }
+            return;
+        }
+
+        // args.length >= 2
+        if (Role.getRoleByName(args[1]) == null) {
+            if (isPlayer) {
+                player.sendMessage("§cUtilize apenas grupos válidos.");
+            } else {
+                sender.sendMessage("Grupo inválido.");
+            }
+            return;
+        }
+
+        // Executa o comando de mudança de role
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + args[0] + " parent set " + args[1]);
+
+        String roleName = Role.getRoleByName(args[1]).getName();
+
+        if (isPlayer) {
+            player.sendMessage(Language.roles$set.replace("{player}", args[0]).replace("{role}", roleName));
+        } else {
+            sender.sendMessage("Grupo " + roleName + " definido para " + args[0]);
+        }
+
+        Bukkit.getOnlinePlayers().forEach(p ->
+                NMS.sendTitle(p,
+                        Language.roles$titles$header.replace("{player}", StringUtils.getFirstColor(roleName) + " " + args[0]),
+                        Language.roles$titles$footer.replace("{role}", roleName))
+        );
+
+        Player target = Bukkit.getPlayerExact(args[0]);
+        if (target != null && target.isOnline()) {
+            target.sendMessage(Language.roles$notification.replace("{role}", roleName));
         }
     }
+
 
 }

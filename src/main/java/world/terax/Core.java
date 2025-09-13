@@ -133,20 +133,6 @@ public class Core extends Plugin {
       Bukkit.setSpawnRadius(0);
     }
     
-    // Remover /reload
-    try {
-      SimpleCommandMap simpleCommandMap = (SimpleCommandMap) Bukkit.getServer().getClass().getDeclaredMethod("getCommandMap").invoke(Bukkit.getServer());
-      Field field = simpleCommandMap.getClass().getDeclaredField("knownCommands");
-      field.setAccessible(true);
-      Map<String, Command> knownCommands = (Map<String, Command>) field.get(simpleCommandMap);
-      knownCommands.remove("rl");
-      knownCommands.remove("reload");
-      knownCommands.remove("bukkit:rl");
-      knownCommands.remove("bukkit:reload");
-    } catch (ReflectiveOperationException ex) {
-      getLogger().log(Level.SEVERE, "Cannot remove reload command: ", ex);
-    }
-    
     if (!PlaceholderAPIPlugin.getInstance().getDescription().getVersion().equals("2.10.5")) {
       Bukkit.getConsoleSender().sendMessage(" \n §6§lAVISO IMPORTANTE\n \n §7Utilize a versão 2.10.5 do PlaceHolderAPI, você está utilizando a v" + PlaceholderAPIPlugin.getInstance().getDescription().getVersion() + "\n ");
       System.exit(0);

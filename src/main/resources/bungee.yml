@@ -1,5 +1,5 @@
-author: Kiwizin
-name: kCore
+author: neveshardd
+name: Core
 version: 1.0
 
-main: dev.slickcollections.kiwizin.bungee.Bungee
+main: world.terax.bungee.Bungee

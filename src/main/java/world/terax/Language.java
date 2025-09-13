@@ -14,7 +14,6 @@ import java.util.logging.Level;
 
 public class Language {
 
-    public static String roles$default = "§7Membro";
     public static String roles$set = "§aVocê setou o grupo de {player} para {role}§a.";
     public static String roles$notification = "\n§aAgora você é {role}§a! Caso seu grupo\n§anão tenha atualizado basta relogar.\n \n";
     public static String roles$titles$header = "{player}";

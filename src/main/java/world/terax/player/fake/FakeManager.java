@@ -28,7 +28,7 @@ public class FakeManager {
       "eyJ0aW1lc3RhbXAiOjE1ODcxMzkyMDU4MzUsInByb2ZpbGVJZCI6Ijc1MTQ0NDgxOTFlNjQ1NDY4Yzk3MzlhNmUzOTU3YmViIiwicHJvZmlsZU5hbWUiOiJUaGFua3NNb2phbmciLCJzaWduYXR1cmVSZXF1aXJlZCI6dHJ1ZSwidGV4dHVyZXMiOnsiU0tJTiI6eyJ1cmwiOiJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzNiNjBhMWY2ZDU2MmY1MmFhZWJiZjE0MzRmMWRlMTQ3OTMzYTNhZmZlMGU3NjRmYTQ5ZWEwNTc1MzY2MjNjZDMiLCJtZXRhZGF0YSI6eyJtb2RlbCI6InNsaW0ifX19fQ==:W60UUuAYlWfLFt5Ay3Lvd/CGUbKuuU8+HTtN/cZLhc0BC22XNgbY1btTite7ZtBUGiZyFOhYqQi+LxVWrdjKEAdHCSYWpCRMFhB1m0zEfu78yg4XMcFmd1v7y9ZfS45b3pLAJ463YyjDaT64kkeUkP6BUmgsTA2iIWvM33k6Tj3OAM39kypFSuH+UEpkx603XtxratD+pBjUCUvWyj2DMxwnwclP/uACyh0ZVrI7rC5xJn4jSura+5J2/j6Z/I7lMBBGLESt7+pGn/3/kArDE/1RShOvm5eYKqrTMRfK4n3yd1U1DRsMzxkU2AdlCrv1swT4o+Cq8zMI97CF/xyqk8z2L98HKlzLjtvXIE6ogljyHc9YsfU9XhHwZ7SKXRNkmHswOgYIQCSa1RdLHtlVjN9UdUyUoQIIO2AWPzdKseKJJhXwqKJ7lzfAtStErRzDjmjr7ld/5tFd3TTQZ8yiq3D6aRLRUnOMTr7kFOycPOPhOeZQlTjJ6SH3PWFsdtMMQsGzb2vSukkXvJXFVUM0TcwRZlqT5MFHyKBBPprIt0wVN6MmSKc8m5kdk7ZBU2ICDs/9Cd/fyzAIRDu3Kzm7egbAVK9zc1kXwGzowUkGGy1XvZxyRS5jF1zu6KzVgaXOGcrOLH4z/OHzxvbyW22/UwahWGN7MD4j37iJ7gjZDrk=";
   
   private static final Config CONFIG = Core.getInstance().getConfig("utils");
-  private static final Pattern REAL_PATTERN = Pattern.compile("(?i)kcorefakereal:\\w*"), NOT_CHANGE_PATTERN = Pattern.compile("(?i)kcorenotchange:\\w*");
+  private static final Pattern REAL_PATTERN = Pattern.compile("(?i)corefakereal:\\w*"), NOT_CHANGE_PATTERN = Pattern.compile("(?i)corenotchange:\\w*");
   
   public static Map<String, String> fakeNames = new HashMap<>();
   public static Map<String, Role> fakeRoles = new HashMap<>();
@@ -186,7 +186,7 @@ public class FakeManager {
       Matcher matcher = Pattern.compile("(?i)" + name).matcher(replaced);
       
       while (matcher.find()) {
-        replaced = replaced.replaceFirst(Pattern.quote(matcher.group()), Matcher.quoteReplacement("kcorenotchange:" + name));
+        replaced = replaced.replaceFirst(Pattern.quote(matcher.group()), Matcher.quoteReplacement("corenotchange:" + name));
       }
     }
     
@@ -200,8 +200,8 @@ public class FakeManager {
       Matcher matcher = NOT_CHANGE_PATTERN.matcher(replaced);
       while (matcher.find()) {
         String found = matcher.group();
-        backup.add(found.replace("kcorenotchange:", ""));
-        replaced = replaced.replaceFirst(Pattern.quote(found), Matcher.quoteReplacement("kcorenotchange:" + (backup.size() - 1)));
+        backup.add(found.replace("corenotchange:", ""));
+        replaced = replaced.replaceFirst(Pattern.quote(found), Matcher.quoteReplacement("corenotchange:" + (backup.size() - 1)));
       }
       
       matcher = Pattern.compile("(?i)" + (toFake ? name : getFake(name))).matcher(replaced);
@@ -214,13 +214,13 @@ public class FakeManager {
     while (matcher.find()) {
       String found = matcher.group();
       replaced = replaced.replaceFirst(Pattern.quote(found), Matcher.quoteReplacement(
-          fakeNames.entrySet().stream().filter(entry -> entry.getValue().equals(found.replace("kcorefakereal:", ""))).map(Map.Entry::getKey).findFirst().orElse("")));
+          fakeNames.entrySet().stream().filter(entry -> entry.getValue().equals(found.replace("corefakereal:", ""))).map(Map.Entry::getKey).findFirst().orElse("")));
     }
     
     matcher = NOT_CHANGE_PATTERN.matcher(replaced);
     while (matcher.find()) {
       String found = matcher.group();
-      replaced = replaced.replaceFirst(Pattern.quote(matcher.group()), Matcher.quoteReplacement(backup.get(Integer.parseInt(found.replace("kcorenotchange:", "")))));
+      replaced = replaced.replaceFirst(Pattern.quote(matcher.group()), Matcher.quoteReplacement(backup.get(Integer.parseInt(found.replace("corenotchange:", "")))));
     }
     
     backup.clear();

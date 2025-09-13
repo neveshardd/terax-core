@@ -109,10 +109,15 @@ public class MenuSetRole extends PagedPlayerMenu {
 
         if (role != null) {
             // Gera comando automaticamente se não estiver definido
-            String roleNameCommand = role.getRole() != null ? role.getRole().getName().toLowerCase() : role.getName().toLowerCase();
+            String roleNameCommand = role.getRole() != null
+                    ? role.getRole().getName().toLowerCase()
+                    : role.getName().toLowerCase();
+
             String cmd = role.getCmd();
             if (cmd == null || cmd.isEmpty()) {
-                cmd = "lp user " + target + " parent set " + roleNameCommand;
+                cmd = "lp user " + target + " group set " + roleNameCommand;
+            } else {
+                cmd = cmd.replace("{player}", target);
             }
 
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
